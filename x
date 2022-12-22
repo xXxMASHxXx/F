@@ -22,7 +22,7 @@ plot(t,b1);
 grid;
 xlabel('t');
 ylabel('b1(t)');
-title("First basis psi-1 function(ECE20109)");
+title("First basis psi-1 function(ECE20XXX)");
 grid;
 e2=@(t)((1)^2).*(t>=0 & t<=1) + ((-1)^2).*(t>=1 & t<=2);
 E2=integral(e2,0,2);
@@ -38,13 +38,13 @@ xlabel('t');
 ylabel('b2(t)');
 title("Second basis psi-2 function(ECE20XXX)");
 s1b1=@(t)(sqrt(2).*(t>=0 & t<=2)).*(sqrt(2)/2);
-C11 = round(integral(s1b1,0,2))
+C11 = round(integral(s1b1,0,2));
 s1b2=@(t)(sqrt(2).*(t>=0 & t<=2)).*((sqrt(2)/2).*(t>=0&t<=1)+((-sqrt(2)/2).*(t>1&t<=2)));
-C12 = round(integral(s1b2,0,2))
+C12 = round(integral(s1b2,0,2));
 s2b1=@(t)((1).*(t<=1)+(-1.*(t>1&t<=2))).*(sqrt(2)/2);
-C21=round(integral(s2b1,0,2))
+C21=round(integral(s2b1,0,2));
 s2b2=@(t)((1).*(t<=1)).*(sqrt(2)/2)+((-1).*(t>1&t<=2)).*(((-sqrt(2)/2).*(t>1&t<=2)));
-C22=integral(s2b2,0,2)
+C22=integral(s2b2,0,2);
 figure;
 plot(C11,C12,'o');
 grid;
@@ -57,6 +57,7 @@ grid;
 xlabel('w1');
 ylabel('w2');
 title("Vector Representation of s2(t)(ECE20XXX)");
+
  
  
  
