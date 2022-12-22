@@ -61,6 +61,72 @@ title("Vector Representation of s2(t)(ECE20XXX)");
  
  
  
+ PCM 
+ 
+clc;
+clear all;
+b=input('Enter Quantization Interval:: ');
+t = 0:0.0005:10;
+
+% Representation of the Message Signal
+x = sin(t);
+subplot(3,1,1);
+plot(t,x,'black');
+title('Message Signal');
+xlabel('Time(s) ---->')
+ylabel('Amplitude(V) ---->')
+legend('Message Signal ---->');
+grid on
+
+% Representation of the Quantized Signal
+partition = -1:0.1:b;
+codebook = -1:0.1:(b+0.1);
+[index,quants] = quantiz(x,partition,codebook);
+subplot(3,1,2);
+plot(t,quants);
+title('Quantized Signal');
+xlabel('Samples ---->')
+ylabel('Amplitude(V) ---->')
+legend('Quantized Signal ---->');
+grid on
+
+% Representation of the PCM Signal
+y = uencode(quants,3);
+subplot(3,1,3);
+plot(t,y,'red');
+title('PCM Signal');
+xlabel('Samples ---->');
+ylabel('Amplitude(V) ---->')
+legend('PCM Signal ---->');
+grid on
+
+% Add title to the Overall Plot
+ha = axes ('Position',[0 0 1 1],'Xlim',[0 1],'Ylim',[0 1],'Box','off','Visible','off','Units','normalized', 'clipping' , 'off');
+text (0.5, 1,'\bf Pulse Code Modulation ','HorizontalAlignment','center','VerticalAlignment', 'top')
+
+
+BER
+clc;
+clear;
+close;
+sig_length=200000;
+Eb=1;
+EtoN_dB=linspace(0,20,100);
+EtoN=10.^(EtoN_dB/10);
+
+BER_BASK_te=((0.5)*erfc(sqrt(EtoN/4)));
+BER_BPSK_te=((0.5)*erfc(sqrt(EtoN)));
+
+semilogy(EtoN_dB,BER_BASK_te,'red')
+hold on
+semilogy(EtoN_dB,BER_BPSK_te,'blue')
+legend('BASK','BPSK')
+axis([min(EtoN_dB) max(EtoN_dB) 10^(-6) 1])
+xlabel('Eb/No (dB)')
+ylabel('BER')
+title('Plot for BASK and BPSK')
+ 
+ 
 EYE PATTERN
 clc;
 clear;
