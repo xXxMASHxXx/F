@@ -1,3 +1,51 @@
+QUANTIZATION
+clc;
+clear;
+close;
+N=8;
+Emin=-1;
+Emax=1;
+delta=(Emax-Emin)/N;
+part=(Emin+delta):delta:(Emax-delta);
+x=Emin:0.001:Emax;
+code=(Emin+(delta/2):delta:(Emax-delta/2));
+[ind,Q]=quantiz(x,part,code);
+figure;
+plot(x,Q);
+xlabel("decision threshold");
+ylabel("quantization levels");
+title("transfer characteristics(ECE20109)");
+grid;
+t=-1:0.001:1;
+x1=sin(2*pi*t);
+fs=30;
+n=-1*fs:1:1*fs;
+x2=sin(2*pi*n/fs);
+figure(2);
+subplot(2,1,1);
+stem(n,x2);
+xlabel("n");
+ylabel("x2")
+title("sampled signal(ECE20109)");
+grid;
+[index,P]=quantiz(x2,part,code);
+subplot(2,1,2);
+stem(n,P);
+xlabel("n");
+ylabel("P")
+title(" quantized signal");
+grid;
+error=P-x2;
+figure(3);
+plot(n,error);
+xlabel("time");
+ylabel("error")
+title("error(ECE20109)")
+dec2bin(index)
+max(error)
+
+
+
 GS 
 t=0:0.001:3;
 s1=sqrt(2).*(t>=0 & t<=2);
